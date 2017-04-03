@@ -1,14 +1,21 @@
-dad(steve, ash).
 mom(susan, ash).
-dad(steve, paxton).
 mom(susan, paxton).
+mom(virgina, susan).
+dad(steve, ash).
+dad(steve, paxton).
+dad(george, steve).
 
 parent(Parent, Child) :- dad(Parent, Child).
 parent(Parent, Child) :- mom(Parent, Child).
 
+siblings(Child1, Child2) :- dad(Father, Child1),
+							dad(Father, Child2).
+
+gma(Gparent, Gchild):- mom(Gparent, Mom), mom(Mom, Gchild).
 
 room(outside, 1).
 room(1, 2). room(1, 7).
+room(2, 1). room(2, 8).
 room(3, 8).
 room(4, 8). room(4, 9). 
 room(5, 6). room(5, 9).
@@ -24,6 +31,10 @@ room(13, 7).
 room(14, 7). room(14, 15). 
 room(15, 14). room(15, 16).
 
-path(Oldest, Youngest):- room(Oldest, Youngest).
-path(Oldest, Youngest):- room(Younger, Youngest), 
-						path(Oldest, Younger).
+
+
+% path(This, Next):- room(This, Next).
+% path(This, NextNext):- room(This, Next), path(Next, NextNext).
+
+path(Y, Z) :- room(Y, Z).
+path(X, Z) :- room(Y, Z), path(X, Y). 
