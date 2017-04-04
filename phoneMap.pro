@@ -38,3 +38,8 @@ room(15, 14). room(15, 16).
 
 path(Y, Z) :- room(Y, Z).
 path(X, Z) :- room(Y, Z), path(X, Y). 
+
+
+path_(Y, Z) :- room(Y, Z).
+path_(X, Z) :- room(Y, Z), path_(X, Y).
+path_(X, Z, [Path]) :- path_(Path, X), path_(X, Z). 
