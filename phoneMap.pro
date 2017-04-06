@@ -32,7 +32,14 @@ room(15, 16).
 
 linked(X,Y) :- room(X,Y) ; room(Y,X). 
 
+phone(X, [X|_Xs]).
+phone(X, [_Y|Ys]) :- phone(X, Ys). 
+
+
+path(Start, Stop, Path) :- path(Start, Stop, [Start], Path).
+
 path(Start, Stop, Path, [Stop|Path]) :- linked(Start, Stop). 
+
 path(Start, Stop, Visited, Path) :- 
 	linked(Start, Next), 
 	Next \== Stop, 
